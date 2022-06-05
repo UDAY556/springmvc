@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Repository
@@ -27,11 +28,12 @@ public class UserDao {
    }
 
    public User getUserById(int id) {
-       return users
-               .stream()
-               .filter(user -> user.getId()==id)
-               .findFirst()
-               .get();
+
+       for (User user: users){
+           if (user.getId() == id)
+               return user;
+       }
+       return null;
    }
 
    public Boolean deleteByID(int id) {
